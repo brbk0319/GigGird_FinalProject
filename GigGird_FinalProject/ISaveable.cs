@@ -4,7 +4,8 @@ using System.Text;
 
 namespace GigGird_FinalProject
 {
-    internal class Client
+    internal interface ISaveable
     {
+        //TODO: Save Information to another file
     }
 }

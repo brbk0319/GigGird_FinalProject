@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GigGird_FinalProject
+namespace GigGird_FinalProject.Money
 {
-    internal class ClientManager
+    internal class PriceManager
     {
     }
 }
