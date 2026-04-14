@@ -1,56 +1,67 @@
-﻿using System;
+﻿using GigGird_FinalProject.Projects;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace GigGird_FinalProject
 {
-    abstract class BaseContract : ISaveable
-    {
+    public abstract class BaseContract : ISaveable
+    { // all about the money
         public string ClientName { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime StartDate {  get; set; }
-        public DateTime EndDate { get; set; }
-        public DateTime DateCompleted { get; set; }
+        public DateTime Deadline { get; set; }
 
-        protected double BaseRate { get; set; }
-        protected double AdditionalFees { get; set; }
+        private decimal _baseRate; //TODO: BaseRate = price rate (in project)
+        public decimal BaseRate
+        {
+            get { return _baseRate; }
+            set { _baseRate = value < 0 ? 0 : value ; }
+        }
+        private decimal _additionalFees;
+        public decimal AdditionalFees
+        {
+            get { return _additionalFees; }
+            set { _additionalFees = value < 0 ? 0 : value; }
+        }
 
 
-        protected BaseContract(string clientName)
+        public BaseContract(string clientName)
         {
             ClientName = clientName;
             DateCreated = DateTime.Now;
         }
 
-        public abstract double CalculateInvoiceTotal();
+        public abstract decimal CalculateInvoiceTotal();
 
         
     }
 
-    class HourlyContract : BaseContract
+    public class HourlyContract : BaseContract
     {
-        public double TotalHours { get; set; }
+        public decimal TotalHours { get; set; }
 
-        public HourlyContract(string clientName, double hourlyRate) : base(clientName)
+        public HourlyContract(string clientName, decimal hourlyRate) : base(clientName)
         {  BaseRate = hourlyRate; }
-        public override double CalculateInvoiceTotal()
+        public override decimal CalculateInvoiceTotal()
         {
             /* TODO
-             * needs to access total hours and type of project
-             * to calculate the price, based off of a menu I create
+             * needs to access project type to calculate the price, based off of a menu
              */
             return (TotalHours * BaseRate) + AdditionalFees;
         }
     }
 
-    class ProjectContract : BaseContract
+    public class ProjectContract : BaseContract
     {
-        public ProjectContract(string clientName, double projectRate) : base(clientName)
+        public ProjectContract(string clientName, decimal projectRate) : base(clientName)
         { BaseRate = projectRate; }
 
-        public override double CalculateInvoiceTotal()
+        public decimal depositAmount { get; set; }
+
+        public override decimal CalculateInvoiceTotal()
         {
-            double invoice;
+            decimal invoice;
             /* TODO
              * needs to access type of project to calculate 
              * the price, based off of a menu I create
