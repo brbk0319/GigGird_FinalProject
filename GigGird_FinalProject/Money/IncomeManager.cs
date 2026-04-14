@@ -7,6 +7,8 @@ namespace GigGird_FinalProject.Money
     internal class IncomeManager : ISaveable
     {
         /*TODO: 
+         * record all income, the project it came from, date, client, etc
+         * 
          *  tithing calculator
          *  savings calculator
          *  highest paying clientel/projects

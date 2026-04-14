@@ -11,5 +11,6 @@ namespace GigGird_FinalProject.Projects
 
         List<BaseContract> CurrentProjects = new List<BaseContract>();
         List<BaseContract> PastProjects = new List<BaseContract>();
+
     }
 }

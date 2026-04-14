@@ -34,7 +34,7 @@ namespace GigGird_FinalProject
 
         public abstract decimal CalculateInvoiceTotal();
 
-        
+        public abstract void CalculateAdditionalFees();
     }
 
     public class HourlyContract : BaseContract
@@ -48,7 +48,21 @@ namespace GigGird_FinalProject
             /* TODO
              * needs to access project type to calculate the price, based off of a menu
              */
+
+            CalculateAdditionalFees();
             return (TotalHours * BaseRate) + AdditionalFees;
+        }
+
+        public override void CalculateAdditionalFees()
+        {
+            //Ask user for whatever needs additional fees, check again before calculating total
+        }
+
+        public void UpdateHours()
+        {
+            //TODO: ask user for dates/times worked
+            decimal newHours = 0;
+            TotalHours += newHours;
         }
     }
 
@@ -66,10 +80,43 @@ namespace GigGird_FinalProject
              * needs to access type of project to calculate 
              * the price, based off of a menu I create
              */
+            CalculateAdditionalFees();
 
             invoice = BaseRate + AdditionalFees; 
             return invoice;
         }
+
+        public override void CalculateAdditionalFees()
+        {
+            //Ask user for whatever needs additional fees, check again before calculating total
+        }
     }
 
+    public class ReOccuringContract : BaseContract
+    {
+        public ReOccuringContract(string clientName, decimal projectRate) : base(clientName)
+        { BaseRate = projectRate; }
+
+        public decimal depositAmount { get; set; }
+
+        public override decimal CalculateInvoiceTotal()
+        {
+            decimal invoice;
+            /* TODO
+             * needs to access type of project to calculate 
+             * the price, based off of a menu I create
+             */
+            CalculateAdditionalFees();
+
+            invoice = BaseRate + AdditionalFees;
+            return invoice;
+        }
+
+        //TODO: method to remind to send invoice?
+
+        public override void CalculateAdditionalFees()
+        {
+            //Ask user for whatever needs additional fees, check again before calculating total
+        }
+    }
 }

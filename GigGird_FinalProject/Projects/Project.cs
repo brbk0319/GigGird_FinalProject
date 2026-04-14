@@ -25,8 +25,9 @@ namespace GigGird_FinalProject.Projects
         {
             ProjectClient = new Client(clientName);
 
-            ContractType();
             CheckProjectType();
+            CheckPriceRate();
+            ContractType();
         }
 
         public void ContractType()
@@ -50,6 +51,13 @@ namespace GigGird_FinalProject.Projects
             TypesOfProjects projectType = new TypesOfProjects();
             //TODO: Text and user response (CheckProjectType)
             return projectType = ProjectType; 
+        }
+
+        public void CheckPriceRate()
+        {
+            //call price manager 
+            //decimal response = decimal.Parse(Console.ReadLine());
+            //PriceRate = response;
         }
     }
 
