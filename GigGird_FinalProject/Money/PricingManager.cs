@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GigGird_FinalProject.Money
 {
-    internal class PriceManager
+    internal class PricingManager
     {
 
         /*TODO: display general price/description for each type of project, plus things
@@ -13,9 +13,9 @@ namespace GigGird_FinalProject.Money
              * Then, ask the price decided for the project
              */
 
-        public PriceManager() { }
+        public PricingManager() { }
 
-        public void PriceMenu()
+        public void PricingMenu()
         {
             //switch for each enum, description, price, and additional fees
         }
