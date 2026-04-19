@@ -8,67 +8,67 @@ using System.Net.NetworkInformation;
 using System.Text;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace GigGird_FinalProject.Menus
+namespace GigGird_FinalProject.MainMenus
 {
-    /*  MENUs(each thing will need a menu -________-)
-         * call main menu(static thing? that calls the other things?)
+    /*  MainMenus(each thing will need a MainMenu -________-)
+         * call main MainMenu(static thing? that calls the other things?)
          * view current projects(shows name of project, client name, price rate and deadline)
          * vew past / all projects(with numbers, just input number)
          * view clients
          * view income
          * exit program
-         * static method return to main menu in each mini menu
+         * static method return to main MainMenu in each mini MainMenu
     */
 
-    //TODO: make enum for each menu? keep in namespace, then just call whatever one is needed?
+    //TODO: make enum for each MainMenu? keep in namespace, then just call whatever one is needed?
     //(add _ to the enum names so you can just call the names?)
 
-    public class Menu
+    public class MainMenu
     {
-        public Menu() { }
+        public MainMenu() { }
 
-        public enum EnumMenu
+        public enum MainMenuEnum
         {
-            viewMainMenu = 0,
-            viewCurrentProjects = 1,
-            viewProjectMenu = 2,
-            viewClientMenu = 3,
-            viewIncomeMenu = 4,
+            ViewMainMainMenu = 0,
+            ViewCurrentProjects = 1,
+            ViewProjectMenu = 2,
+            ViewClientMenu = 3,
+            ViewIncomeMenu = 4,
             exit = 5,
             developer = 67,
         }
 
-        public void DisplayMenu()
+        public static void DisplayMainMenu()
         {
             Console.WriteLine("WELCOME TO GIGGRID\n");
-            string menuQuery = "Where would you like to go?" +
+            string MainMenuQuery = "Where would you like to go?" +
                 "\n     1. Current Projects " +
-                "\n     2. Project Menu " +
-                "\n     3. Client Menu " +
-                "\n     4. Income Menu " +
+                "\n     2. Project MainMenu " +
+                "\n     3. Client MainMenu " +
+                "\n     4. Income MainMenu " +
                 "\n     5. Exit GigGrid";
 
 
-            GetEnum(menuQuery, out EnumMenu menuChoice);
+            GetEnum(MainMenuQuery, out MainMenuEnum MainMenuChoice);
 
-            switch (menuChoice)
+            switch (MainMenuChoice)
             {
-                case EnumMenu.viewMainMenu:
-                    //MainMenu.DisplayMenu();
+                case MainMenuEnum.ViewMainMainMenu:
+                    //MainMainMenu.DisplayMainMenu();
                     break;
-                case EnumMenu.viewCurrentProjects:
-                    //TODO: whatever option in Project Menu that shows current projects;
+                case MainMenuEnum.ViewCurrentProjects:
+                    //TODO: whatever option in Project MainMenu that shows current projects;
                     break;
-                case EnumMenu.viewProjectMenu:
-                    //ProjectMenu.DisplayMenu();
+                case MainMenuEnum.ViewProjectMenu:
+                    //ProjectMainMenu.DisplayMainMenu();
                     break;
-                case EnumMenu.viewClientMenu:
-                    //ClientMenu.DisplayMenu();
+                case MainMenuEnum.ViewClientMenu:
+                    //ClientMainMenu.DisplayMainMenu();
                     break;
-                case EnumMenu.viewIncomeMenu:
-                    //IncomeMenu.DisplayMenu();
+                case MainMenuEnum.ViewIncomeMenu:
+                    //IncomeMainMenu.DisplayMainMenu();
                     break;
-                case EnumMenu.exit:
+                case MainMenuEnum.exit:
                     string exitConfirmation = "Are you CERTAIN you wish to leave?\n     Yes\n     No";
 
                     GetYesNo(exitConfirmation, out bool choice);
@@ -83,7 +83,7 @@ namespace GigGird_FinalProject.Menus
                     }
                     break;
 
-                case EnumMenu.developer:
+                case MainMenuEnum.developer:
                     Console.WriteLine(":89. Welcome to the developer's side.\nOkay bye");
                     break;
                 default:
@@ -95,15 +95,15 @@ namespace GigGird_FinalProject.Menus
             }
         }
 
-        public static void GetEnum(string question, out EnumMenu menuChoice)
+        public static void GetEnum(string question, out MainMenuEnum MainMenuChoice)
         {
-            menuChoice = EnumMenu.viewMainMenu;
+            MainMenuChoice = MainMenuEnum.ViewMainMainMenu;
             while (true)
             {
                 Console.WriteLine(question);
                 string input = Console.ReadLine();
 
-                if (Enum.TryParse(input, true, out menuChoice))
+                if (Enum.TryParse(input, true, out MainMenuChoice))
                 { return; }
                 else { Console.WriteLine("Haha, try again."); }
             }
@@ -124,37 +124,5 @@ namespace GigGird_FinalProject.Menus
             }
         }
     }
-    public class MainMenu : Menu { }
 
-    public class ProjectMenu : Menu { }
-    /* each project:
-            name, client, contract type, price rate
-            creation date, deadlines(days left)
-            options: edit project/contract, static return to main menu
-    */
-
-    public class ClientMenu : Menu { }
-    /* each client:
-            name, projects, average hourly/project price rate
-            location
-            current projects
-            project history
-            rating?
-    */
-
-    public class PricingMenu : Menu { }
-    public class IncomeMenu : Menu { }
-    /* income
-        *view total income
-            *monthly income
-            * weekly income
-            * income types(dad should teach me a spreadsheet)
-            * highest paying client
-        *add income(not from projects)
-        * savings?
-            * calculate savings based on percentage?
-            * update paid savings?
-        * view tithing(including upaid tithing)
-            * update paid tithing, calculate new total
-            */
 }
