@@ -19,56 +19,65 @@ namespace GigGird_FinalProject.Menus
             ViewAllClients = 2,
             AddNewClient = 3,
             ArchiveClient = 4,
+            ViewClientMenu = 5,
         }
-        public void DisplayMenu()
+        public static void DisplayMenu()
         {
-            Console.WriteLine("WELCOME TO GIGGRID\n");
-            string menuQuery = "Where would you like to go?" +
-                "\n     1. Current Projects " +
-                "\n     2. Project Menu " +
-                "\n     3. Client Menu " +
-                "\n     4. Income Menu " +
-                "\n     5. Exit GigGrid";
-
-
-            GetEnum(menuQuery, out ClientMenuEnum menuChoice);
-
-            switch (menuChoice)
+            bool isRunning = true;
+            while (isRunning)
             {
-                case ClientMenuEnum.ViewMainMenu:
-                    DisplayMainMenu();
-                    break;
-                case ClientMenuEnum.ViewCurrentClients:
-                    //TODO: method to show clients with current/ongoing contracts
-                    break;
-                case ClientMenuEnum.ViewAllClients:
-                    //TODO: method to display all clients, with option to edit clients
-                    break;
-                case ClientMenuEnum.AddNewClient:
-                    //TODO: method to create new client
-                    break;
-                case ClientMenuEnum.ArchiveClient:
-                    //method to archive clients (separate section in all clients)
-                    break;
+                Console.Clear();
+                Console.WriteLine("CLIENT MENU" + 
+                    "\nWhere would you like to go?" +
+                    "\n     0. Return to Main Menu" +
+                    "\n     1. View Current Clients " +
+                    "\n     2. View All Clients " +
+                    "\n     3. Add New Client " +
+                    "\n     4. Archive Client ");
 
-                default:
-                    Console.WriteLine("You think you're clever, huh? Try again.'");
-                    break;
+
+                ClientMenuEnum menuChoice = GetEnum();
+
+                switch (menuChoice)
+                {
+                    case ClientMenuEnum.ViewMainMenu:
+                        DisplayMainMenu();
+                        break;
+                    case ClientMenuEnum.ViewCurrentClients:
+                        //TODO: method to show clients with current/ongoing contracts
+                        break;
+                    case ClientMenuEnum.ViewAllClients:
+                        //TODO: method to display all clients, with option to edit clients
+                        break;
+                    case ClientMenuEnum.AddNewClient:
+                        //TODO: method to create new client
+                        break;
+                    case ClientMenuEnum.ArchiveClient:
+                        //method to archive clients (separate section in all clients)
+                        break;
+                    case ClientMenuEnum.ViewClientMenu:
+                        //TODO: add await here
+                        Console.WriteLine();
+                        break;
+                    default:
+                        Console.WriteLine("You think you're clever, huh? Press any key to try again.");
+                        Console.ReadKey();
+                        break;
+                }
             }
         }
 
-        public void GetEnum(string question, out ClientMenuEnum menuChoice)
+        public static ClientMenuEnum GetEnum()
         {
-            menuChoice = ClientMenuEnum.ViewMainMenu;
-            while (true)
-            {
-                Console.WriteLine(question);
-                string input = Console.ReadLine();
+            ClientMenuEnum menuChoice = ClientMenuEnum.ViewClientMenu;
+            string input = Console.ReadLine();
 
-                if (Enum.TryParse(input, true, out menuChoice))
-                { return; }
-                else { Console.WriteLine("Haha, try again."); }
+            if (Enum.TryParse(input, true, out menuChoice)) { }
+            else
+            {
+                Console.WriteLine("Haha, try again.");
             }
+            return menuChoice;
         }
     }
 

@@ -11,24 +11,28 @@ namespace GigGird_FinalProject.Menus
             CreateProjectType = 2,
             ViewAdditionalFeeCauses = 3,
             CreateAdditionalFeeCause = 4,
-            exit = 5,
+            ViewPricingMenu = 5,
         }
         public void DisplayMenu()
         {
-            Console.WriteLine("WELCOME TO GIGGRID\n");
-            string menuQuery = "Where would you like to go?" +
-                "\n     1. Current Projects " +
-                "\n     2. Project Menu " +
-                "\n     3. Client Menu " +
-                "\n     4. Income Menu " +
-                "\n     5. Exit GigGrid";
+            bool isRunning = true;
+            while (isRunning)
+            {
+            Console.WriteLine("WELCOME TO GIGGRID" +
+                "\n Where would you like to go?" +
+                "\n     1. View Project Types & Descriptions " +
+                "\n     2. Create Project Type " +
+                "\n     3. View Additional Fee Causes " +
+                "\n     4. Create Additional Fee Cause " +
+                "\n     5. Exit GigGrid");
 
 
-            GetEnum(menuQuery, out PricingMenuEnum menuChoice);
+            PricingMenuEnum menuChoice = GetEnum();
 
             switch (menuChoice)
             {
                 case PricingMenuEnum.ViewMainMenu:
+                    isRunning = false;
                     DisplayMainMenu();
                     break;
                 case PricingMenuEnum.ViewProjectTypes:
@@ -43,24 +47,26 @@ namespace GigGird_FinalProject.Menus
                 case PricingMenuEnum.CreateAdditionalFeeCause:
                     //TODO: Method to create additional fee cause
                     break;
-                default:
-                    Console.WriteLine("You think you're clever, huh? Try again Hero.'");
+                case PricingMenuEnum.ViewPricingMenu:
+                    //TODO: await, then continue
                     break;
+                    default:
+                        Console.WriteLine("You think you're clever, huh? Press any key to try again.");
+                        Console.ReadKey();
+                        break;
+                }
             }
         }
 
-        public void GetEnum(string question, out PricingMenuEnum menuChoice)
+        public static PricingMenuEnum GetEnum()
         {
-            menuChoice = PricingMenuEnum.ViewMainMenu;
-            while (true)
-            {
-                Console.WriteLine(question);
-                string input = Console.ReadLine();
+            PricingMenuEnum menuChoice = PricingMenuEnum.ViewPricingMenu;
+            string input = Console.ReadLine();
 
-                if (Enum.TryParse(input, true, out menuChoice))
-                { return; }
-                else { Console.WriteLine("Haha, try again."); }
-            }
+            if (Enum.TryParse(input, true, out menuChoice)) { }
+            else { Console.WriteLine("Haha, try again."); }
+
+            return menuChoice;
         }
     }
 

@@ -1,5 +1,7 @@
 
+using System.Net;
 using GigGird_FinalProject.MainMenus;
+using GigGird_FinalProject.Projects;
 
 namespace GigGird_FinalProject.Menus
 {
@@ -12,55 +14,62 @@ namespace GigGird_FinalProject.Menus
                 options: edit project/contract, static return to main menu
         */
         {
-            viewMainMenu = 0,
-            viewCurrentProjects = 1,
-            viewAllProjects = 2,
+            ViewMainMenu = 0,
+            ViewCurrentProjects = 1,
+            ViewAllProjects = 2,
             CreateNewProject = 3,
+            ViewProjectMenu = 4,
         }
-        public void DisplayMenu()
+        public static void DisplayMenu()
         {
-            Console.WriteLine("WELCOME TO GIGGRID\n");
-            string menuQuery = "Where would you like to go?" +
-                "\n     1. Current Projects " +
-                "\n     2. Project Menu " +
-                "\n     3. Client Menu " +
-                "\n     4. Income Menu " +
-                "\n     5. Exit GigGrid";
-
-
-            GetEnum(menuQuery, out ProjectMenuEnum menuChoice);
-
-            switch (menuChoice)
+            bool isRunning = true;
+            while (isRunning)
             {
-                case ProjectMenuEnum.viewMainMenu:
-                    DisplayMainMenu();
-                    break;
-                case ProjectMenuEnum.viewCurrentProjects:
-                    //TODO: whatever option in Project Menu that shows current projects;
-                    break;
-                case ProjectMenuEnum.viewAllProjects:
-                    //ProjectMenu.DisplayMenu();
-                    break;
-                case ProjectMenuEnum.CreateNewProject:
-                    //ClientMenu.DisplayMenu();
-                    break;
-                default:
-                    Console.WriteLine("You think you're clever, huh? Try again Hero.'");
-                    break;
+                Console.WriteLine("WELCOME TO GIGGRID" +
+                    "\nWhere would you like to go?" +
+                    "\n     1. Current Projects " +
+                    "\n     2. View All Projects " +
+                    "\n     3. Create New Project ");
+
+
+                ProjectMenuEnum menuChoice = GetEnum();
+
+                switch (menuChoice)
+                {
+                    case ProjectMenuEnum.ViewMainMenu:
+                        DisplayMainMenu();
+                        break;
+                    case ProjectMenuEnum.ViewCurrentProjects:
+                        //TODO: whatever option in Project Menu that shows current projects;
+                        break;
+                    case ProjectMenuEnum.ViewAllProjects:
+                        //ProjectMenu.DisplayMenu();
+                        break;
+                    case ProjectMenuEnum.CreateNewProject:
+                        //ClientMenu.DisplayMenu();
+                        break;
+                    case ProjectMenuEnum.ViewProjectMenu:
+                        Console.WriteLine();
+                        break;
+                    default:
+                        Console.WriteLine("You think you're clever, huh? Press any key to try again.");
+                        Console.ReadKey();
+                        break;
+                }
             }
         }
 
-        public void GetEnum(string question, out ProjectMenuEnum menuChoice)
+        public static ProjectMenuEnum GetEnum()
         {
-            menuChoice = ProjectMenuEnum.viewMainMenu;
-            while (true)
-            {
-                Console.WriteLine(question);
-                string input = Console.ReadLine();
+            ProjectMenuEnum menuChoice = ProjectMenuEnum.ViewMainMenu;
+            string input = Console.ReadLine();
 
-                if (Enum.TryParse(input, true, out menuChoice))
-                { return; }
-                else { Console.WriteLine("Haha, try again."); }
+            if (Enum.TryParse(input, true, out menuChoice))
+            { return menuChoice; }
+            else
+            {
+                Console.WriteLine("Haha, try again.");
+                return ProjectMenuEnum.ViewProjectMenu;
             }
         }
     }

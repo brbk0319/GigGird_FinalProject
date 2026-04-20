@@ -1,4 +1,5 @@
 ﻿using GigGird_FinalProject.Clients;
+using GigGird_FinalProject.Menus;
 using GigGird_FinalProject.Projects;
 using Microsoft.VisualBasic;
 using System;
@@ -40,58 +41,61 @@ namespace GigGird_FinalProject.MainMenus
 
         public static void DisplayMainMenu()
         {
-            Console.WriteLine("WELCOME TO GIGGRID\n");
-            string MainMenuQuery = "Where would you like to go?" +
-                "\n     1. Current Projects " +
-                "\n     2. Project MainMenu " +
-                "\n     3. Client MainMenu " +
-                "\n     4. Income MainMenu " +
-                "\n     5. Exit GigGrid";
-
-
-            GetEnum(MainMenuQuery, out MainMenuEnum MainMenuChoice);
-
-            switch (MainMenuChoice)
+            bool isRunning = true;
+            while (isRunning)
             {
-                case MainMenuEnum.ViewMainMainMenu:
-                    //MainMainMenu.DisplayMainMenu();
-                    break;
-                case MainMenuEnum.ViewCurrentProjects:
-                    //TODO: whatever option in Project MainMenu that shows current projects;
-                    break;
-                case MainMenuEnum.ViewProjectMenu:
-                    //ProjectMainMenu.DisplayMainMenu();
-                    break;
-                case MainMenuEnum.ViewClientMenu:
-                    //ClientMainMenu.DisplayMainMenu();
-                    break;
-                case MainMenuEnum.ViewIncomeMenu:
-                    //IncomeMainMenu.DisplayMainMenu();
-                    break;
-                case MainMenuEnum.exit:
-                    string exitConfirmation = "Are you CERTAIN you wish to leave?\n     Yes\n     No";
-
-                    GetYesNo(exitConfirmation, out bool choice);
-                    if (choice == true)
-                    {
-                        Console.WriteLine("Farewell Entrepreneuer!");
-                        return;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Cool, off we go.");
-                    }
-                    break;
-
-                case MainMenuEnum.developer:
-                    Console.WriteLine(":89. Welcome to the developer's side.\nOkay bye");
-                    break;
-                default:
-                    Console.WriteLine("You think you're clever, huh? Try again Hero.'");
-                    break;
+                Console.Clear();
+                Console.WriteLine("WELCOME TO GIGGRID\n");
+                string MainMenuQuery = "Where would you like to go?" +
+                    "\n     1. Current Projects " +
+                    "\n     2. Project Menu " +
+                    "\n     3. Client Menu " +
+                    "\n     4. Income Menu " +
+                    "\n     5. Exit GigGrid";
 
 
+                GetEnum(MainMenuQuery, out MainMenuEnum MainMenuChoice);
 
+                switch (MainMenuChoice)
+                {
+                    case MainMenuEnum.ViewMainMainMenu:
+                        Console.WriteLine("");
+                        break;
+                    case MainMenuEnum.ViewCurrentProjects:
+                        //TODO: whatever option in Project MainMenu that shows current projects;
+                        break;
+                    case MainMenuEnum.ViewProjectMenu:
+                        ProjectMenu.DisplayMenu();
+                        break;
+                    case MainMenuEnum.ViewClientMenu:
+                        ClientMenu.DisplayMenu();
+                        break;
+                    case MainMenuEnum.ViewIncomeMenu:
+                        IncomeMenu.DisplayMainMenu();
+                        break;
+                    case MainMenuEnum.exit:
+                        string exitConfirmation = "Are you CERTAIN you wish to leave?\n     Yes\n     No";
+
+                        GetYesNo(exitConfirmation, out bool choice);
+                        if (choice == true)
+                        {
+                            Console.WriteLine("Farewell Entrepreneuer!");
+                            return;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Cool, off we go.");
+                        }
+                        break;
+
+                    case MainMenuEnum.developer:
+                        Console.WriteLine(":89. Welcome to the developer's side.\nOkay bye");
+                        break;
+                    default:
+                        Console.WriteLine("You think you're clever, huh? Press any key and then try again.'");
+                        Console.ReadKey();
+                        break;
+                }
             }
         }
 
