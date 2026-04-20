@@ -2,11 +2,11 @@ using GigGird_FinalProject.MainMenus;
 
 namespace GigGird_FinalProject.Menus
 {
-    public class PricingMenu : MainMenu
+    public class PricingMenu
     {
 
                 private readonly GigGridManager _gridManager;
-        public PricingMenu(GigGridManager gridManager) : base (gridManager)
+        public PricingMenu(GigGridManager gridManager)
         {
             _gridManager = gridManager;
         }
@@ -40,8 +40,7 @@ namespace GigGird_FinalProject.Menus
             {
                 case PricingMenuEnum.ViewMainMenu:
                     isRunning = false;
-                    DisplayMainMenu();
-                    break;
+                    return;
                 case PricingMenuEnum.ViewProjectTypes:
                     //TODO: method to display all project types + rates, option to edit one?
                     break;

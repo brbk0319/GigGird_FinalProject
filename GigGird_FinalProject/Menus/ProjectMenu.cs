@@ -5,12 +5,12 @@ using GigGird_FinalProject.Projects;
 
 namespace GigGird_FinalProject.Menus
 {
-    public class ProjectMenu : MainMenu
+    public class ProjectMenu
     {
 
 
         private readonly GigGridManager _gridManager;
-        public ProjectMenu(GigGridManager gridManager) : base(gridManager)
+        public ProjectMenu(GigGridManager gridManager)
         {
             _gridManager = gridManager;
         }
@@ -46,8 +46,8 @@ namespace GigGird_FinalProject.Menus
                 switch (menuChoice)
                 {
                     case ProjectMenuEnum.ViewMainMenu:
-                        DisplayMainMenu();
-                        break;
+                        isRunning = false;
+                        return;
                     case ProjectMenuEnum.ViewCurrentProjects:
                         _gridManager.projectManager.DisplayCurrentProject();
                         break;

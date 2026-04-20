@@ -28,9 +28,11 @@ namespace GigGird_FinalProject.MainMenus
     {
 
         private readonly GigGridManager _gridManager;
-        public MainMenu(GigGridManager gridManager)
+        private readonly MenuManager _menuManager;
+        public MainMenu(GigGridManager gridManager, MenuManager menuManager)
         {
             _gridManager = gridManager;
+            _menuManager = menuManager;
         }
 
         public enum MainMenuEnum
@@ -70,13 +72,13 @@ namespace GigGird_FinalProject.MainMenus
                         _gridManager.projectManager.DisplayCurrentProject();
                         break;
                     case MainMenuEnum.ViewProjectMenu:
-                        _gridManager.menuManager.projectMenu.DisplayMenu();
+                        _menuManager.projectMenu.DisplayMenu();
                         break;
                     case MainMenuEnum.ViewClientMenu:
-                        _gridManager.menuManager.clientMenu.DisplayMenu();
+                        _menuManager.clientMenu.DisplayMenu();
                         break;
                     case MainMenuEnum.ViewIncomeMenu:
-                        _gridManager.menuManager.incomeMenu.DisplayMainMenu();
+                        _menuManager.incomeMenu.DisplayMenu();
                         break;
                     case MainMenuEnum.exit:
                         string exitConfirmation = "Are you CERTAIN you wish to leave?\n     Yes\n     No";

@@ -16,7 +16,6 @@ namespace GigGird_FinalProject
         public IncomeManager incomeManager { get; } = new IncomeManager();
         public ClientManager clientManager { get; } = new ClientManager();
         public PricingManager pricingManager { get; } = new PricingManager();
-        public MenuManager menuManager { get; } = new MenuManager();
 
         public GigGridManager()
         {

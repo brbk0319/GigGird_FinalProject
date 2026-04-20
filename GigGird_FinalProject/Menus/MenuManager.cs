@@ -5,16 +5,27 @@ namespace GigGird_FinalProject.MainMenus
     public class MenuManager
     {
 
-            //TODO: now they all need a GridManager, fetch.
-            //singleton here?
-            public MainMenu mainMenu {get;} = new MainMenu();
-            public ProjectMenu projectMenu {get;} = new ProjectMenu();
-            public ClientMenu clientMenu {get;} = new ClientMenu();
-            public IncomeMenu incomeMenu {get;} = new IncomeMenu();
-            public PricingMenu pricingMenu {get;} = new PricingMenu();
+        private readonly GigGridManager _gridManager;
 
-        public MenuManager()
+        //TODO: Consider singleton here?
+
+        public MainMenu mainMenu;
+        public ProjectMenu projectMenu;
+        public ClientMenu clientMenu;
+        public IncomeMenu incomeMenu;
+        public PricingMenu pricingMenu;
+
+        public MenuManager(GigGridManager gridManager) 
+        //recursion? GridManager has a menuManager, and menu manager needs a gridmanager
         {
-        }
+            _gridManager = gridManager;
+
+            // mainMenu = new MainMenu(_gridManager);
+            projectMenu = new ProjectMenu(_gridManager);
+            clientMenu = new ClientMenu(_gridManager);
+            incomeMenu = new IncomeMenu(_gridManager);
+            pricingMenu = new PricingMenu(_gridManager);
     }
+
+}
 }

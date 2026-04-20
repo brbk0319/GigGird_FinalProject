@@ -10,10 +10,10 @@ namespace GigGird_FinalProject.Menus
                 project history
                 rating?
         */
-    public class ClientMenu : MainMenu
+    public class ClientMenu
     {
         private readonly GigGridManager _gridManager;
-        public ClientMenu(GigGridManager gridManager) : base (gridManager)
+        public ClientMenu(GigGridManager gridManager)
         {
             _gridManager = gridManager;
         }
@@ -47,22 +47,21 @@ namespace GigGird_FinalProject.Menus
                 switch (menuChoice)
                 {
                     case ClientMenuEnum.ViewMainMenu:
-                        _gridManager.menuManager.mainMenu.DisplayMainMenu();
-                        break;
+                        return;
                     case ClientMenuEnum.ViewCurrentClients:
-                        // _gridManager.clientManager.DisplayCurrentClients();
+                        _gridManager.clientManager.DisplayCurrentClients();
                         //TODO: method to show clients with current/ongoing contracts
                         break;
                     case ClientMenuEnum.ViewAllClients:
-                        // _gridManager.clientManager.DisplayAllClients();
+                        _gridManager.clientManager.DisplayAllClients();
                         //TODO: method to display all clients, with option to edit clients
                         break;
                     case ClientMenuEnum.AddNewClient:
-                        // _gridManager.clientManager.AddNewClient();
+                        _gridManager.clientManager.AddNewClient();
                         //TODO: method to create new client
                         break;
                     case ClientMenuEnum.ArchiveClient:
-                        // _gridManager.clientManager.ArchiveClient();
+                        _gridManager.clientManager.ArchiveClient();
                         //method to archive clients (separate section in all clients)
                         break;
                     case ClientMenuEnum.ViewClientMenu:

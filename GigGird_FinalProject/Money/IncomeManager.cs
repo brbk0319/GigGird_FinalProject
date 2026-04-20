@@ -14,5 +14,39 @@ namespace GigGird_FinalProject.Money
          *  highest paying clientel/projects
          *  save dates, keep accurate records
          */
+
+         /*                 Console.WriteLine("INCOME" +
+                    " \nWhere would you like to go?" +
+                    "\n     1. Current Income " +
+                    "\n     2. Total Income " +
+                    "\n     3. Add Income " +
+                    "\n     4. View Savings " +
+                    "\n     5. View Tithing");
+                    */
+        public void ViewCurrentIncome()
+        {
+
+        }
+
+        public void ViewTotalIncome()
+        {
+            
+        }
+
+        public void AddIncome()
+        {
+            
+        }
+
+        public void ViewSavings()
+        {
+            
+        }
+
+        public void ViewTithing()
+        {
+            
+        }
+
     }
 }

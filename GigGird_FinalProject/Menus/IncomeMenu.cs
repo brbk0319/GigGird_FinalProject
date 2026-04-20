@@ -1,9 +1,17 @@
+using System.Runtime.InteropServices;
 using GigGird_FinalProject.MainMenus;
 
 namespace GigGird_FinalProject.Menus
 {
-    public class IncomeMenu : MainMenu
+    public class IncomeMenu
     {
+
+        private readonly GigGridManager _gridManager;
+        public IncomeMenu(GigGridManager gridManager)
+        {
+            _gridManager = gridManager;
+        }
+
         public enum IncomeMenuEnum
         {
             ViewMainMenu = 0,
@@ -14,18 +22,18 @@ namespace GigGird_FinalProject.Menus
             ViewTithing = 5,
             ViewIncomeMenu = 6,
         }
-        public static void DisplayMenu()
+        public void DisplayMenu()
         {
             bool isRunning = true;
             while (isRunning)
             {
-                Console.WriteLine("WELCOME TO GIGGRID" + 
+                Console.WriteLine("INCOME" +
                     " \nWhere would you like to go?" +
-                    "\n     1. Current Projects " +
-                    "\n     2. Project Menu " +
-                    "\n     3. Client Menu " +
-                    "\n     4. Income Menu " +
-                    "\n     5. ViewTithing GigGrid");
+                    "\n     1. Current Income " +
+                    "\n     2. Total Income " +
+                    "\n     3. Add Income " +
+                    "\n     4. View Savings " +
+                    "\n     5. View Tithing");
 
 
                 IncomeMenuEnum menuChoice = GetEnum();
@@ -33,21 +41,25 @@ namespace GigGird_FinalProject.Menus
                 switch (menuChoice)
                 {
                     case IncomeMenuEnum.ViewMainMenu:
-                        DisplayMainMenu();
-                        break;
+                        return;
                     case IncomeMenuEnum.ViewCurrentIncome:
+                        _gridManager.incomeManager.ViewCurrentIncome();
                         //TODO: method that shows income expected that week;
                         break;
                     case IncomeMenuEnum.ViewTotalIncome:
+                        _gridManager.incomeManager.ViewTotalIncome();
                         //TODO: method - menu for total income: monthly, weekly, types, highest paying clients
                         break;
                     case IncomeMenuEnum.AddIncome:
+                        _gridManager.incomeManager.AddIncome();
                         //TODO: method to Record outside source of income;
                         break;
                     case IncomeMenuEnum.ViewSavings:
+                        _gridManager.incomeManager.ViewSavings();
                         //TODO: savings menu, caclulate savings + update paid savings
                         break;
                     case IncomeMenuEnum.ViewTithing:
+                        _gridManager.incomeManager.ViewTithing();
                         //TODO: Tithing Menu, calculate tithing + update paid tithing
                         break;
                     default:
@@ -58,7 +70,7 @@ namespace GigGird_FinalProject.Menus
             }
         }
 
-        public static IncomeMenuEnum GetEnum() //TODO: polymorphism?
+        public IncomeMenuEnum GetEnum() //TODO: polymorphism?
         {
             IncomeMenuEnum menuChoice = IncomeMenuEnum.ViewIncomeMenu;
             string input = Console.ReadLine();
