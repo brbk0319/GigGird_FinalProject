@@ -7,6 +7,14 @@ namespace GigGird_FinalProject.Menus
 {
     public class ProjectMenu : MainMenu
     {
+
+
+        private readonly GigGridManager _gridManager;
+        public ProjectMenu(GigGridManager gridManager) : base(gridManager)
+        {
+            _gridManager = gridManager;
+        }
+
         public enum ProjectMenuEnum
         /* each project:
                 name, client, contract type, price rate
@@ -20,13 +28,14 @@ namespace GigGird_FinalProject.Menus
             CreateNewProject = 3,
             ViewProjectMenu = 4,
         }
-        public static void DisplayMenu()
+        public void DisplayMenu()
         {
             bool isRunning = true;
             while (isRunning)
             {
-                Console.WriteLine("WELCOME TO GIGGRID" +
+                Console.WriteLine("PROJECTS" +
                     "\nWhere would you like to go?" +
+                    "\n     0. Return to Main Menu" +
                     "\n     1. Current Projects " +
                     "\n     2. View All Projects " +
                     "\n     3. Create New Project ");
@@ -40,13 +49,13 @@ namespace GigGird_FinalProject.Menus
                         DisplayMainMenu();
                         break;
                     case ProjectMenuEnum.ViewCurrentProjects:
-                        //TODO: whatever option in Project Menu that shows current projects;
+                        _gridManager.projectManager.DisplayCurrentProject();
                         break;
                     case ProjectMenuEnum.ViewAllProjects:
-                        //ProjectMenu.DisplayMenu();
+                        _gridManager.projectManager.DisplayAllProjects();
                         break;
                     case ProjectMenuEnum.CreateNewProject:
-                        //ClientMenu.DisplayMenu();
+                        _gridManager.projectManager.CreateNewProject();
                         break;
                     case ProjectMenuEnum.ViewProjectMenu:
                         Console.WriteLine();
@@ -59,7 +68,7 @@ namespace GigGird_FinalProject.Menus
             }
         }
 
-        public static ProjectMenuEnum GetEnum()
+        public ProjectMenuEnum GetEnum()
         {
             ProjectMenuEnum menuChoice = ProjectMenuEnum.ViewMainMenu;
             string input = Console.ReadLine();

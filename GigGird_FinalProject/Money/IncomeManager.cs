@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GigGird_FinalProject.Money
 {
-    internal class IncomeManager : ISaveable
+    public class IncomeManager : ISaveable
     {
         /*TODO: 
          * record all income, the project it came from, date, client, etc

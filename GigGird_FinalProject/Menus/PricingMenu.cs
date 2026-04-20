@@ -4,6 +4,13 @@ namespace GigGird_FinalProject.Menus
 {
     public class PricingMenu : MainMenu
     {
+
+                private readonly GigGridManager _gridManager;
+        public PricingMenu(GigGridManager gridManager) : base (gridManager)
+        {
+            _gridManager = gridManager;
+        }
+
         public enum PricingMenuEnum
         {
             ViewMainMenu = 0,
@@ -13,7 +20,7 @@ namespace GigGird_FinalProject.Menus
             CreateAdditionalFeeCause = 4,
             ViewPricingMenu = 5,
         }
-        public void DisplayMenu()
+        public void DisplayMenu(MenuManager menuManager)
         {
             bool isRunning = true;
             while (isRunning)
@@ -58,7 +65,7 @@ namespace GigGird_FinalProject.Menus
             }
         }
 
-        public static PricingMenuEnum GetEnum()
+        public PricingMenuEnum GetEnum()
         {
             PricingMenuEnum menuChoice = PricingMenuEnum.ViewPricingMenu;
             string input = Console.ReadLine();

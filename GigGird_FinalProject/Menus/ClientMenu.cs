@@ -3,8 +3,6 @@ using GigGird_FinalProject.MainMenus;
 
 namespace GigGird_FinalProject.Menus
 {
-    public class ClientMenu : MainMenu
-    {
         /* each client:
                 name, projects, average hourly/project price rate
                 location
@@ -12,6 +10,14 @@ namespace GigGird_FinalProject.Menus
                 project history
                 rating?
         */
+    public class ClientMenu : MainMenu
+    {
+        private readonly GigGridManager _gridManager;
+        public ClientMenu(GigGridManager gridManager) : base (gridManager)
+        {
+            _gridManager = gridManager;
+        }
+
         public enum ClientMenuEnum
         {
             ViewMainMenu = 0,
@@ -21,13 +27,13 @@ namespace GigGird_FinalProject.Menus
             ArchiveClient = 4,
             ViewClientMenu = 5,
         }
-        public static void DisplayMenu()
+        public void DisplayMenu()
         {
             bool isRunning = true;
             while (isRunning)
             {
                 Console.Clear();
-                Console.WriteLine("CLIENT MENU" + 
+                Console.WriteLine("CLIENT MENU" +
                     "\nWhere would you like to go?" +
                     "\n     0. Return to Main Menu" +
                     "\n     1. View Current Clients " +
@@ -41,18 +47,22 @@ namespace GigGird_FinalProject.Menus
                 switch (menuChoice)
                 {
                     case ClientMenuEnum.ViewMainMenu:
-                        DisplayMainMenu();
+                        _gridManager.menuManager.mainMenu.DisplayMainMenu();
                         break;
                     case ClientMenuEnum.ViewCurrentClients:
+                        // _gridManager.clientManager.DisplayCurrentClients();
                         //TODO: method to show clients with current/ongoing contracts
                         break;
                     case ClientMenuEnum.ViewAllClients:
+                        // _gridManager.clientManager.DisplayAllClients();
                         //TODO: method to display all clients, with option to edit clients
                         break;
                     case ClientMenuEnum.AddNewClient:
+                        // _gridManager.clientManager.AddNewClient();
                         //TODO: method to create new client
                         break;
                     case ClientMenuEnum.ArchiveClient:
+                        // _gridManager.clientManager.ArchiveClient();
                         //method to archive clients (separate section in all clients)
                         break;
                     case ClientMenuEnum.ViewClientMenu:
@@ -67,7 +77,7 @@ namespace GigGird_FinalProject.Menus
             }
         }
 
-        public static ClientMenuEnum GetEnum()
+        public ClientMenuEnum GetEnum()
         {
             ClientMenuEnum menuChoice = ClientMenuEnum.ViewClientMenu;
             string input = Console.ReadLine();

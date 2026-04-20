@@ -26,7 +26,12 @@ namespace GigGird_FinalProject.MainMenus
 
     public class MainMenu
     {
-        public MainMenu() { }
+
+        private readonly GigGridManager _gridManager;
+        public MainMenu(GigGridManager gridManager)
+        {
+            _gridManager = gridManager;
+        }
 
         public enum MainMenuEnum
         {
@@ -39,22 +44,22 @@ namespace GigGird_FinalProject.MainMenus
             developer = 67,
         }
 
-        public static void DisplayMainMenu()
+        public void DisplayMainMenu()
         {
             bool isRunning = true;
             while (isRunning)
             {
                 Console.Clear();
-                Console.WriteLine("WELCOME TO GIGGRID\n");
-                string MainMenuQuery = "Where would you like to go?" +
+                Console.WriteLine("WELCOME TO GIGGRID" +
+                    "\n Where would you like to go?" +
                     "\n     1. Current Projects " +
                     "\n     2. Project Menu " +
                     "\n     3. Client Menu " +
                     "\n     4. Income Menu " +
-                    "\n     5. Exit GigGrid";
+                    "\n     5. Exit GigGrid");
 
 
-                GetEnum(MainMenuQuery, out MainMenuEnum MainMenuChoice);
+                MainMenuEnum MainMenuChoice = GetEnum();
 
                 switch (MainMenuChoice)
                 {
@@ -62,16 +67,16 @@ namespace GigGird_FinalProject.MainMenus
                         Console.WriteLine("");
                         break;
                     case MainMenuEnum.ViewCurrentProjects:
-                        //TODO: whatever option in Project MainMenu that shows current projects;
+                        _gridManager.projectManager.DisplayCurrentProject();
                         break;
                     case MainMenuEnum.ViewProjectMenu:
-                        ProjectMenu.DisplayMenu();
+                        _gridManager.menuManager.projectMenu.DisplayMenu();
                         break;
                     case MainMenuEnum.ViewClientMenu:
-                        ClientMenu.DisplayMenu();
+                        _gridManager.menuManager.clientMenu.DisplayMenu();
                         break;
                     case MainMenuEnum.ViewIncomeMenu:
-                        IncomeMenu.DisplayMainMenu();
+                        _gridManager.menuManager.incomeMenu.DisplayMainMenu();
                         break;
                     case MainMenuEnum.exit:
                         string exitConfirmation = "Are you CERTAIN you wish to leave?\n     Yes\n     No";
@@ -99,33 +104,29 @@ namespace GigGird_FinalProject.MainMenus
             }
         }
 
-        public static void GetEnum(string question, out MainMenuEnum MainMenuChoice)
+        public MainMenuEnum GetEnum()
         {
-            MainMenuChoice = MainMenuEnum.ViewMainMainMenu;
-            while (true)
-            {
-                Console.WriteLine(question);
-                string input = Console.ReadLine();
+            MainMenuEnum menuChoice = MainMenuEnum.ViewMainMainMenu;
+            string input = Console.ReadLine();
 
-                if (Enum.TryParse(input, true, out MainMenuChoice))
-                { return; }
-                else { Console.WriteLine("Haha, try again."); }
-            }
+            if (Enum.TryParse(input, true, out menuChoice)) { }
+            else { Console.WriteLine("Haha, try again."); }
+            return menuChoice;
         }
-        public static void GetYesNo(string question, out bool choice)
+
+        public void GetYesNo(string question, out bool choice)
         {
             choice = false;
-            while (true)
-            {
-                Console.WriteLine(question);
-                string input = Console.ReadLine().ToLower();
-                if (input == "yes" || input == "yeah")
-                { choice = true; return; }
-                else if (input == "no" || input == "nah")
-                { choice = false; return; }
-                else
-                { Console.WriteLine("Haha, try again."); }
-            }
+
+            Console.WriteLine(question);
+            string input = Console.ReadLine().ToLower();
+            if (input == "yes" || input == "yeah")
+            { choice = true; return; }
+            else if (input == "no" || input == "nah")
+            { choice = false; return; }
+            else
+            { Console.WriteLine("Haha, try again."); }
+
         }
     }
 

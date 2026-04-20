@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GigGird_FinalProject.Money
 {
-    internal class PricingManager
+    public class PricingManager
     {
 
         /*TODO: display general price/description for each type of project, plus things
