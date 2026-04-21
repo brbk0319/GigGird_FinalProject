@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static GigGird_FinalProject.MainMenus.MainMenu;
+using static GigGird_FinalProject.Menu;
 
 namespace GigGird_FinalProject
 {
@@ -33,17 +33,16 @@ namespace GigGird_FinalProject
             }
         }
 
-        public static void GetYesNo(string question, out bool choice)
+        public static bool GetYesNo(string question)
         {
-            choice = false;
             while (true)
             {
                 Console.WriteLine(question);
                 string input = Console.ReadLine().ToLower();
-                if (input == "yes" || input == "yeah")
-                { choice = true; return; }
-                else if (input == "no" || input == "nah")
-                { choice = false; return; }
+                if (input == "yes" || input == "yeah" || input == "y")
+                { return true; }
+                else if (input == "no" || input == "nah" || input == "n")
+                { return false; }
                 else
                 { Console.WriteLine("Haha, try again."); }
             }

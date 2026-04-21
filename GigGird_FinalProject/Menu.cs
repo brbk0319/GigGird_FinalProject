@@ -1,5 +1,4 @@
 ﻿using GigGird_FinalProject.Clients;
-using GigGird_FinalProject.Menus;
 using GigGird_FinalProject.Money;
 using GigGird_FinalProject.Projects;
 using Microsoft.VisualBasic;
@@ -10,7 +9,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace GigGird_FinalProject.MainMenus
+namespace GigGird_FinalProject
 {
     /*  MainMenus(each thing will need a MainMenu -________-)
          * call main MainMenu(static thing? that calls the other things?)
@@ -25,11 +24,11 @@ namespace GigGird_FinalProject.MainMenus
     //TODO: make enum for each MainMenu? keep in namespace, then just call whatever one is needed?
     //(add _ to the enum names so you can just call the names?)
 
-    public class MainMenu
+    public class Menu
     {
 
         private readonly GigGridManager _gridManager;
-        public MainMenu(GigGridManager gridManager)
+        public Menu(GigGridManager gridManager)
         {
             _gridManager = gridManager;
         }
@@ -59,7 +58,7 @@ namespace GigGird_FinalProject.MainMenus
                         Console.WriteLine("");
                         break;
                     case MainMenuEnum.ViewCurrentProjects:
-                        _gridManager.projectManager.DisplayCurrentProject();
+                        _gridManager.ProjectManager.DisplayCurrentProject();
                         break;
                     case MainMenuEnum.ViewProjectMenu:
                        DisplayProjectMenu();
@@ -76,7 +75,7 @@ namespace GigGird_FinalProject.MainMenus
                     case MainMenuEnum.exit:
                         string exitConfirmation = "Are you CERTAIN you wish to leave?\n     Yes\n     No";
 
-                        GigUtils.GetYesNo(exitConfirmation, out bool choice);
+                        bool choice = GigUtils.GetYesNo(exitConfirmation);
                         if (choice == true)
                         {
                             Console.WriteLine("Farewell Entrepreneuer!");
@@ -97,7 +96,6 @@ namespace GigGird_FinalProject.MainMenus
                 }
             }
         }
-
 
         public void DisplayProjectMenu()
         {
@@ -121,13 +119,13 @@ namespace GigGird_FinalProject.MainMenus
                         Console.WriteLine();
                         break;
                     case ProjectMenuEnum.ViewCurrentProjects:
-                        _gridManager.projectManager.DisplayCurrentProject();
+                        _gridManager.ProjectManager.DisplayCurrentProject();
                         break;
                     case ProjectMenuEnum.ViewAllProjects:
-                        _gridManager.projectManager.DisplayAllProjects();
+                        _gridManager.ProjectManager.DisplayAllProjects();
                         break;
                     case ProjectMenuEnum.CreateNewProject:
-                        _gridManager.projectManager.CreateNewProject();
+                        _gridManager.ProjectManager.CreateNewProject();
                         break;
                     case ProjectMenuEnum.ViewMainMenu:
                         isRunning = false;
@@ -163,11 +161,11 @@ namespace GigGird_FinalProject.MainMenus
                         Console.WriteLine();
                         break;
                     case PricingMenuEnum.ViewProjectTypes:
-                        _gridManager.pricingManager.DisplayAllPriceDescriptions();
+                        _gridManager.PricingManager.DisplayAllPriceDescriptions();
                         //TODO: add option to edit rates?
                         break;
                     case PricingMenuEnum.CreateProjectType:
-                        _gridManager.pricingManager.CreateNewProjectType();
+                        _gridManager.PricingManager.CreateNewProjectType();
                         //TODO: method to create/record new project type + rate
                         break;
                     case PricingMenuEnum.ViewAdditionalFeeCauses:
@@ -210,14 +208,14 @@ namespace GigGird_FinalProject.MainMenus
                         Console.WriteLine();
                         break;
                     case ClientMenuEnum.ViewCurrentClients:
-                        _gridManager.clientManager.DisplayCurrentClients();
+                        _gridManager.ClientManager.DisplayCurrentClients();
                         break;
                     case ClientMenuEnum.ViewAllClients:
-                        _gridManager.clientManager.DisplayAllClients();
+                        _gridManager.ClientManager.DisplayAllClients();
                         //TODO: add option to edit clients after all are displayed?
                         break;
                     case ClientMenuEnum.AddNewClient:
-                        _gridManager.clientManager.AddNewClient();
+                        _gridManager.ClientManager.AddNewClient();
                         break;
                     case ClientMenuEnum.ViewMainMenu:
                         isRunning = false;
@@ -254,19 +252,19 @@ namespace GigGird_FinalProject.MainMenus
                         Console.WriteLine();
                         break;
                     case IncomeMenuEnum.ViewCurrentIncome:
-                        _gridManager.incomeManager.ViewCurrentIncome();
+                        _gridManager.IncomeManager.ViewCurrentIncome();
                         break;
                     case IncomeMenuEnum.ViewTotalIncome:
-                        _gridManager.incomeManager.ViewTotalIncome();
+                        _gridManager.IncomeManager.ViewTotalIncome();
                         break;
                     case IncomeMenuEnum.AddIncome:
-                        _gridManager.incomeManager.AddIncome();
+                        _gridManager.IncomeManager.AddIncome();
                         break;
                     case IncomeMenuEnum.ViewSavings:
-                        _gridManager.incomeManager.ViewSavings();
+                        _gridManager.IncomeManager.ViewSavings();
                         break;
                     case IncomeMenuEnum.ViewTithing:
-                        _gridManager.incomeManager.ViewTithing();
+                        _gridManager.IncomeManager.ViewTithing();
                         break;
                     case IncomeMenuEnum.ViewMainMenu:
                         isRunning = false;
@@ -278,7 +276,6 @@ namespace GigGird_FinalProject.MainMenus
                 }
             }
         }
-
 
         public enum MainMenuEnum
         {

@@ -24,16 +24,30 @@ namespace GigGird_FinalProject.Clients
         {
             foreach (var client in CurrentClients)
             {
-                Console.WriteLine($"{client.Name}");
-                Console.WriteLine("  Ongoing Projects:");
-                foreach (var project in client.OngoingContracts)
+                Console.WriteLine($"{client.Name}\n--------------------");
+                Console.WriteLine("  ONGOING PROJECTS");
+
+                var currentByDeadline = client.OngoingContracts
+                    .OrderByDescending(p => p.Deadline)
+                    .ThenBy(p => p.ProjectType.PriceRate)
+                    .ToList();
+
+                foreach (var project in currentByDeadline)
                 {
-                    Console.WriteLine("   " + project.ProjectType.Name);
+                    Console.WriteLine($"   Project Type - {project.ProjectType.Name}" +
+                        $"\n     Project Rate - ${project.ProjectType.PriceRate}");
                 }
-                Console.WriteLine("  Completed Projects:");
-                foreach (var project in client.CompletedContracts)
+
+                var completeByDeadline = client.CompletedContracts
+                    .OrderByDescending(p => p.Deadline)
+                    .ThenBy(p => p.ProjectType.PriceRate)
+                    .ToList();
+
+                Console.WriteLine("  COMPLETED PROJECTS");
+                foreach (var project in completeByDeadline)
                 {
-                    Console.WriteLine("   " + project.ProjectType.Name);
+                    Console.WriteLine($"   Project Type - {project.ProjectType.Name}" +
+                        $"\n     Project Rate - ${project.ProjectType.PriceRate}");
                 }
             }
         }

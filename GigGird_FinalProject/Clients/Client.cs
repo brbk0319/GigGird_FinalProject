@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GigGird_FinalProject.Projects;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,8 +13,8 @@ namespace GigGird_FinalProject.Clients
         public string Contact;
         private bool CompletedPayment { get; set; }
 
-        public List<ProjectContract> OngoingContracts { get; set; }
-        public List<ProjectContract> CompletedContracts { get; set; }
+        public List<Project> OngoingContracts { get; set; }
+        public List<Project> CompletedContracts { get; set; }
 
         public Client() { }
 

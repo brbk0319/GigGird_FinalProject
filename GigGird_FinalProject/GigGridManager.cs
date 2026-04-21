@@ -4,22 +4,23 @@ using System.Text;
 using GigGird_FinalProject.Clients;
 using GigGird_FinalProject.Money;
 using GigGird_FinalProject.Projects;
-using GigGird_FinalProject.Menus;
-using GigGird_FinalProject.MainMenus;
 
 namespace GigGird_FinalProject
 {
     public class GigGridManager
     {
 
-        public ProjectManager projectManager { get; } = new ProjectManager();
-        public IncomeManager incomeManager { get; } = new IncomeManager();
-        public ClientManager clientManager { get; } = new ClientManager();
-        public PricingManager pricingManager { get; } = new PricingManager();
+        public IncomeManager IncomeManager { get; } = new IncomeManager();
+        public ClientManager ClientManager { get; } = new ClientManager();
+        public PricingAndFeeManager PricingManager { get; } 
+        public ProjectManager ProjectManager { get; } 
 
         public GigGridManager()
         {
-            
+            ClientManager = new ClientManager();
+            PricingManager = new PricingAndFeeManager();
+            ProjectManager = new ProjectManager(this);
+            IncomeManager = new IncomeManager();
         }
     }
 }

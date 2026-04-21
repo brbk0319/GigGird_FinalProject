@@ -15,14 +15,11 @@ namespace GigGird_FinalProject.Money
          *  save dates, keep accurate records
          */
 
-         /*                 Console.WriteLine("INCOME" +
-                    " \nWhere would you like to go?" +
-                    "\n     1. Current Income " +
-                    "\n     2. Total Income " +
-                    "\n     3. Add Income " +
-                    "\n     4. View Savings " +
-                    "\n     5. View Tithing");
-                    */
+        /*TODO: Income subscribes to projectmanager/giggridmanager and watches
+         *      for when money comes in (required to go in and manually enter)
+         *      
+         */
+
         public void ViewCurrentIncome()
         {
 

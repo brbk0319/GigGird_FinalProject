@@ -4,8 +4,6 @@ using System.Text;
 using GigGird_FinalProject.Clients;
 using GigGird_FinalProject.Money;
 using GigGird_FinalProject.Projects;
-using GigGird_FinalProject.Menus;
-using GigGird_FinalProject.MainMenus;
 
 namespace GigGird_FinalProject
 {
@@ -16,6 +14,9 @@ namespace GigGird_FinalProject
         public GridRunner( GigGridManager gManager)
         {
             _gManager = gManager;
+            Menu gridMenu = new Menu(_gManager);
+
+            gridMenu.DisplayMainMenu();
         }
 
         /* TODO: 
@@ -32,10 +33,6 @@ namespace GigGird_FinalProject
          *      create client
          *          edit/archive client
          *          display client info
-         *          
-         * Price manager - mainly just to keep track of general prices/charges for types of project
-         *      project > contract creation > calls price manager, displays all info
-         *          caculator method asks for what I'm charging, extra fees applicable, gives an estimate based on the contract I picked
          *          
          * Income manager - records the money I make (subscriber to event?)
          *      method to calculate total money made (default: timespan = current year, but optional other dates, also all time)
