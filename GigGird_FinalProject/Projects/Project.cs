@@ -1,6 +1,8 @@
 ﻿using GigGird_FinalProject.Clients;
+using GigGird_FinalProject.Money;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Text;
 
 namespace GigGird_FinalProject.Projects
@@ -13,67 +15,35 @@ namespace GigGird_FinalProject.Projects
 
         private Client ProjectClient { get; set; }
         public string ProjectStatus { get; set; }
-        public TypesOfProjects ProjectType { get; set; }
+        public PriceType ProjectType { get; set; }
 
         public List<string> ToDoList { get; set; }
         public List<string> InProgressList { get; set; }
         public List<string> CompletedList { get; set; }
 
-        public Project() { }
-
-        public Project(string clientName)
+        public Project(Client client, PriceType projectType)
         {
-            ProjectClient = new Client(clientName);
-
-            CheckProjectType();
-            CheckPriceRate();
-            ContractType();
+            ProjectClient = client;
+            ProjectType = projectType;
+            ProjectContract = ContractType();
         }
 
-        public void ContractType()
+        public BaseContract ContractType()
         {
             BaseContract contract;
-            Console.WriteLine("What kind of contract is this?\n   1) Hourly\n   2) Project");
+            Console.WriteLine("What kind of contract is this?\n   1) Hourly\n   2) Project\n   3) Re-Occuring");
             int response = int.Parse(Console.ReadLine());
 
             switch (response)
             {
-                case 1: contract = new HourlyContract(ProjectClient.Name, PriceRate); break;
-                case 2: contract = new ProjectContract(ProjectClient.Name, PriceRate); break;
+                case 1: contract = new HourlyContract(ProjectClient, ProjectType); break;
+                case 2: contract = new ProjectContract(ProjectClient, ProjectType); break;
+                case 3: contract = new ReOccuringContract(ProjectClient, ProjectType); break;
                 default: Console.WriteLine("Yeah no try again"); contract = null; break;
             }
 
-            ProjectContract = contract;
+            return contract;
         }
 
-        public TypesOfProjects CheckProjectType()
-        {
-            TypesOfProjects projectType = new TypesOfProjects();
-            //TODO: Text and user response (CheckProjectType)
-            return projectType = ProjectType; 
-        }
-
-        public void CheckPriceRate()
-        {
-            //call price manager 
-            //decimal response = decimal.Parse(Console.ReadLine());
-            //PriceRate = response;
-        }
-    }
-
-
-
-    public enum TypesOfProjects //TODO: enum/dictionary for job types and their base rates
-    {
-        OddJob,
-        Cleaning,
-        DeepCleaning,
-        Children,
-        Pets,
-        Moving,
-        Errands,
-        HolidayPartyHelp,
-        VirtualAssistant,
-        CustomDesigns,
     }
 }

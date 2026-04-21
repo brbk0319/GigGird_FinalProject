@@ -1,17 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using GigGird_FinalProject.Clients;
+using GigGird_FinalProject.Money;
 
 namespace GigGird_FinalProject.Projects
 {
     public class ProjectManager
     {
         //TODO: Singleton? Only one instance of Project Manager
-        public ProjectManager() { }
+
+        // public PricingManager PriceManager {get;} = new PricingManager();
+
+        // private readonly GigGridManager _gridManager;
+
+        // public ProjectManager(GigGridManager gridManager)
+        // {
+        //     _gridManager = gridManager;
+        // }
+
 
         List<BaseContract> CurrentProjects = new List<BaseContract>();
         List<BaseContract> PastProjects = new List<BaseContract>();
-
 
         public void DisplayCurrentProject()
         {
@@ -27,9 +37,19 @@ namespace GigGird_FinalProject.Projects
 
         public void CreateNewProject()
         {
-            //TODO: call new Project();
+            Project project = new Project(GetClient(), CheckProjectType());
         }
 
+        public PriceType CheckProjectType()
+        {
+            PriceType projectType = PricingManager.PricingMenu();
+            return projectType;
+        }
 
+        public Client GetClient()
+        {
+            return Client client;
+        }
+        
     }
 }

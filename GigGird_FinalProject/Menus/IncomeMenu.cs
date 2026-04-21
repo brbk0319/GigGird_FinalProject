@@ -44,23 +44,18 @@ namespace GigGird_FinalProject.Menus
                         return;
                     case IncomeMenuEnum.ViewCurrentIncome:
                         _gridManager.incomeManager.ViewCurrentIncome();
-                        //TODO: method that shows income expected that week;
                         break;
                     case IncomeMenuEnum.ViewTotalIncome:
                         _gridManager.incomeManager.ViewTotalIncome();
-                        //TODO: method - menu for total income: monthly, weekly, types, highest paying clients
                         break;
                     case IncomeMenuEnum.AddIncome:
                         _gridManager.incomeManager.AddIncome();
-                        //TODO: method to Record outside source of income;
                         break;
                     case IncomeMenuEnum.ViewSavings:
                         _gridManager.incomeManager.ViewSavings();
-                        //TODO: savings menu, caclulate savings + update paid savings
                         break;
                     case IncomeMenuEnum.ViewTithing:
                         _gridManager.incomeManager.ViewTithing();
-                        //TODO: Tithing Menu, calculate tithing + update paid tithing
                         break;
                     default:
                         Console.WriteLine("You think you're clever, huh? Press any key to try again.");

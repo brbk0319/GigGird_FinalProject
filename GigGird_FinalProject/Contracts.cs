@@ -1,4 +1,6 @@
-﻿using GigGird_FinalProject.Projects;
+﻿using GigGird_FinalProject.Clients;
+using GigGird_FinalProject.Money;
+using GigGird_FinalProject.Projects;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,17 +9,13 @@ namespace GigGird_FinalProject
 {
     public abstract class BaseContract : ISaveable
     { // all about the money
-        public string ClientName { get; set; }
+        public Client Client { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime StartDate {  get; set; }
         public DateTime Deadline { get; set; }
 
-        private decimal _baseRate; //TODO: BaseRate = price rate (in project)
-        public decimal BaseRate
-        {
-            get { return _baseRate; }
-            set { _baseRate = value < 0 ? 0 : value ; }
-        }
+        public PriceType ProjectType {get; set; } 
+        //TODO: BaseRate = price rate (in project)
         private decimal _additionalFees;
         public decimal AdditionalFees
         {
@@ -26,9 +24,16 @@ namespace GigGird_FinalProject
         }
 
 
-        public BaseContract(string clientName)
+        public BaseContract(Client client)
         {
-            ClientName = clientName;
+            Client = client;
+            DateCreated = DateTime.Now;
+        }
+
+        public BaseContract(Client client, PriceType projectType)
+        {
+            Client = client;
+            ProjectType = projectType;
             DateCreated = DateTime.Now;
         }
 
@@ -41,21 +46,21 @@ namespace GigGird_FinalProject
     {
         public decimal TotalHours { get; set; }
 
-        public HourlyContract(string clientName, decimal hourlyRate) : base(clientName)
-        {  BaseRate = hourlyRate; }
+        public HourlyContract(Client client, PriceType projectType) : base(client, projectType)
+        { }
         public override decimal CalculateInvoiceTotal()
         {
-            /* TODO
-             * needs to access project type to calculate the price, based off of a menu
+            /* TODO:
+             * figure out additionalFees
              */
 
             CalculateAdditionalFees();
-            return (TotalHours * BaseRate) + AdditionalFees;
+            return (TotalHours * ProjectType.PriceRate) + AdditionalFees;
         }
 
         public override void CalculateAdditionalFees()
         {
-            //Ask user for whatever needs additional fees, check again before calculating total
+            //TODO: Ask user for whatever needs additional fees, check again before calculating total
         }
 
         public void UpdateHours()
@@ -68,47 +73,47 @@ namespace GigGird_FinalProject
 
     public class ProjectContract : BaseContract
     {
-        public ProjectContract(string clientName, decimal projectRate) : base(clientName)
-        { BaseRate = projectRate; }
+        public ProjectContract(Client client, PriceType projectType) : base(client, projectType)
+        {}
 
         public decimal depositAmount { get; set; }
 
         public override decimal CalculateInvoiceTotal()
         {
             decimal invoice;
-            /* TODO
+            /* TODO:
              * needs to access type of project to calculate 
              * the price, based off of a menu I create
              */
             CalculateAdditionalFees();
 
-            invoice = BaseRate + AdditionalFees; 
+            invoice = ProjectType.PriceRate + AdditionalFees; 
             return invoice;
         }
 
         public override void CalculateAdditionalFees()
         {
-            //Ask user for whatever needs additional fees, check again before calculating total
+            //TODO: Ask user for whatever needs additional fees, check again before calculating total
         }
     }
 
     public class ReOccuringContract : BaseContract
     {
-        public ReOccuringContract(string clientName, decimal projectRate) : base(clientName)
-        { BaseRate = projectRate; }
+        public ReOccuringContract(Client client, PriceType projectType) : base(client, projectType)
+        { }
 
         public decimal depositAmount { get; set; }
 
         public override decimal CalculateInvoiceTotal()
         {
             decimal invoice;
-            /* TODO
+            /* TODO:
              * needs to access type of project to calculate 
              * the price, based off of a menu I create
              */
             CalculateAdditionalFees();
 
-            invoice = BaseRate + AdditionalFees;
+            invoice = ProjectType.PriceRate + AdditionalFees;
             return invoice;
         }
 
@@ -116,7 +121,7 @@ namespace GigGird_FinalProject
 
         public override void CalculateAdditionalFees()
         {
-            //Ask user for whatever needs additional fees, check again before calculating total
+            //TODO: ask user for whatever needs additional fees, check again before calculating total
         }
     }
 }
