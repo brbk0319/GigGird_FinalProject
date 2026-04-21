@@ -6,6 +6,17 @@ namespace GigGird_FinalProject.Money
 {
     public class IncomeManager : ISaveable
     {
+        
+        public decimal TotalIncomeEver { get; set; }
+        public List<decimal> MonthlyIncomes { get; set; }
+        public decimal WeeklyIncome { get; set; }
+        public decimal TithingToPay { get; set; }
+        public decimal TotalYearTithing { get; set; }
+        
+        public decimal SpendingMoney { get; set; }
+        
+        
+        
         /*TODO: 
          * record all income, the project it came from, date, client, etc
          * 

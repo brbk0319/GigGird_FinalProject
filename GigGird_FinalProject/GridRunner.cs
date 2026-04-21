@@ -19,7 +19,7 @@ namespace GigGird_FinalProject
 
         public void Run()
         {
-            Menu gridMenu = new Menu(_gManager);
+            Menus gridMenu = new Menus(_gManager);
             gridMenu.DisplayMainMenu();
             //Debug thing won't run????? idk.
         }

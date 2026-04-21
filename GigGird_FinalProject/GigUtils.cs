@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static GigGird_FinalProject.Menu;
+using System.Text.Json;
+using static GigGird_FinalProject.Menus;
 
 namespace GigGird_FinalProject
 {
@@ -46,6 +47,11 @@ namespace GigGird_FinalProject
                 else
                 { Console.WriteLine("Haha, try again."); }
             }
+
+        }
+
+        public static string FormatToJSON<T>() where T : struct, Object
+        {
 
         }
     }

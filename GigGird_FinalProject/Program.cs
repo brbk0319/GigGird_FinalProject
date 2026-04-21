@@ -6,5 +6,3 @@ Console.WriteLine("Hello, World!");
 GridRunner gridRunner = new GridRunner();
 
 gridRunner.Run();
-//Debug not running project??? idk?????????
-

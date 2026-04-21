@@ -18,7 +18,7 @@ namespace GigGird_FinalProject.Clients
                 Console.WriteLine($"{client.Name}\n--------------------");
                 Console.WriteLine("  ONGOING PROJECTS");
 
-                var currentByDeadline = client.OngoingContracts
+                var currentByDeadline = client.OngoingProjects
                     .OrderByDescending(p => p.ProjectContract.Deadline)
                     .ThenBy(p => p.ProjectType.PriceRate)
                     .ToList();
@@ -29,7 +29,7 @@ namespace GigGird_FinalProject.Clients
                         $"\n     Project Rate - ${project.ProjectType.PriceRate}");
                 }
 
-                var completeByDeadline = client.CompletedContracts
+                var completeByDeadline = client.CompletedProjects
                     .OrderByDescending(p => p.ProjectContract.Deadline)
                     .ThenBy(p => p.ProjectType.PriceRate)
                     .ToList();
@@ -48,12 +48,12 @@ namespace GigGird_FinalProject.Clients
             {
                 Console.WriteLine($"{client.Name}");
                 Console.WriteLine("  Ongoing Projects:");
-                foreach (var project in client.OngoingContracts)
+                foreach (var project in client.OngoingProjects)
                 {
                     Console.WriteLine("   " + project.ProjectType.Name);
                 }
                 Console.WriteLine("  Completed Projects:");
-                foreach (var project in client.CompletedContracts)
+                foreach (var project in client.CompletedProjects)
                 {
                     Console.WriteLine("   " + project.ProjectType.Name);
                 }

@@ -11,24 +11,11 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GigGird_FinalProject
 {
-    /*  MainMenus(each thing will need a MainMenu -________-)
-         * call main MainMenu(static thing? that calls the other things?)
-         * view current projects(shows name of project, client name, price rate and deadline)
-         * vew past / all projects(with numbers, just input number)
-         * view clients
-         * view income
-         * exit program
-         * static method return to main MainMenu in each mini MainMenu
-    */
-
-    //TODO: make enum for each MainMenu? keep in namespace, then just call whatever one is needed?
-    //(add _ to the enum names so you can just call the names?)
-
-    public class Menu
+    public class Menus
     {
 
         private readonly GigGridManager _gridManager;
-        public Menu(GigGridManager gridManager)
+        public Menus(GigGridManager gridManager)
         {
             _gridManager = gridManager;
         }
@@ -54,14 +41,14 @@ namespace GigGird_FinalProject
 
                 switch (MainMenuChoice)
                 {
-                    case MainMenuEnum.ViewMainMainMenu:
+                    case MainMenuEnum.ViewMainMenu:
                         Console.WriteLine("");
                         break;
                     case MainMenuEnum.ViewCurrentProjects:
                         _gridManager.ProjectManager.DisplayCurrentProject();
                         break;
                     case MainMenuEnum.ViewProjectMenu:
-                       DisplayProjectMenu();
+                        DisplayProjectMenu();
                         break;
                     case MainMenuEnum.ViewPricingMenu:
                         DisplayPricingMenu();
@@ -105,16 +92,19 @@ namespace GigGird_FinalProject
                 Console.Clear();
                 Console.WriteLine("\nPROJECTS" +
                     "\nWhere would you like to go?" +
+                    "\n     0. Return to Main Menu" +
                     "\n     1. Current Projects " +
                     "\n     2. View All Projects " +
-                    "\n     3. Create New Project " +
-                    "\n     4. Return to Main Menu");
+                    "\n     3. Create New Project ");
 
 
                 ProjectMenuEnum menuChoice = GigUtils.GetEnum<ProjectMenuEnum>();
 
                 switch (menuChoice)
                 {
+                    case ProjectMenuEnum.ViewMainMenu:
+                        isRunning = false;
+                        return;
                     case ProjectMenuEnum.ViewProjectMenu:
                         Console.WriteLine();
                         break;
@@ -127,9 +117,6 @@ namespace GigGird_FinalProject
                     case ProjectMenuEnum.CreateNewProject:
                         _gridManager.ProjectManager.CreateNewProject();
                         break;
-                    case ProjectMenuEnum.ViewMainMenu:
-                        isRunning = false;
-                        return;
                     default:
                         Console.WriteLine("You think you're clever, huh? Press any key to try again.");
                         Console.ReadKey();
@@ -146,6 +133,7 @@ namespace GigGird_FinalProject
                 Console.Clear();
                 Console.WriteLine("\nPRICING MENU" +
                     "\n Where would you like to go?" +
+                    "\n     0. Return to Main Menu " +
                     "\n     1. View Project Types & Descriptions " +
                     "\n     2. Create Project Type " +
                     "\n     3. View Additional Fee Causes " +
@@ -156,6 +144,9 @@ namespace GigGird_FinalProject
 
                 switch (menuChoice)
                 {
+                    case PricingMenuEnum.ViewMainMenu:
+                        isRunning = false;
+                        return;
                     case PricingMenuEnum.ViewPricingMenu:
                         //TODO: await, then continue
                         Console.WriteLine();
@@ -174,9 +165,6 @@ namespace GigGird_FinalProject
                     case PricingMenuEnum.CreateAdditionalFeeCause:
                         //TODO: Method to create additional fee cause
                         break;
-                    case PricingMenuEnum.ViewMainMenu:
-                        isRunning = false;
-                        return;
                     default:
                         Console.WriteLine("You think you're clever, huh? Press any key to try again.");
                         Console.ReadKey();
@@ -193,16 +181,19 @@ namespace GigGird_FinalProject
                 Console.Clear();
                 Console.WriteLine("CLIENT MENU" +
                     "\nWhere would you like to go?" +
+                    "\n     0. Return to Main Menu" +
                     "\n     1. View Current Clients " +
                     "\n     2. View All Clients " +
-                    "\n     3. Add New Client " +
-                    "\n     4. Return to Main Menu");
+                    "\n     3. Add New Client ");
 
 
                 ClientMenuEnum menuChoice = GigUtils.GetEnum<ClientMenuEnum>();
 
                 switch (menuChoice)
                 {
+                    case ClientMenuEnum.ViewMainMenu:
+                        isRunning = false;
+                        return;
                     case ClientMenuEnum.ViewClientMenu:
                         //TODO: add await here
                         Console.WriteLine();
@@ -217,9 +208,6 @@ namespace GigGird_FinalProject
                     case ClientMenuEnum.AddNewClient:
                         _gridManager.ClientManager.AddNewClient();
                         break;
-                    case ClientMenuEnum.ViewMainMenu:
-                        isRunning = false;
-                        return;
                     default:
                         Console.WriteLine("You think you're clever, huh? Press any key to try again.");
                         Console.ReadKey();
@@ -236,18 +224,21 @@ namespace GigGird_FinalProject
                 Console.Clear();
                 Console.WriteLine("INCOME" +
                     " \nWhere would you like to go?" +
+                    "\n     0. Return to Main Menu" +
                     "\n     1. Current Income " +
                     "\n     2. Total Income " +
                     "\n     3. Add Income " +
                     "\n     4. View Savings " +
-                    "\n     5. View Tithing" +
-                    "\n     6. Return to Main Menu");
+                    "\n     5. View Tithing");
 
 
                 IncomeMenuEnum menuChoice = GigUtils.GetEnum<IncomeMenuEnum>();
 
                 switch (menuChoice)
                 {
+                    case IncomeMenuEnum.ViewMainMenu:
+                        isRunning = false;
+                        return;
                     case IncomeMenuEnum.ViewIncomeMenu:
                         Console.WriteLine();
                         break;
@@ -266,9 +257,6 @@ namespace GigGird_FinalProject
                     case IncomeMenuEnum.ViewTithing:
                         _gridManager.IncomeManager.ViewTithing();
                         break;
-                    case IncomeMenuEnum.ViewMainMenu:
-                        isRunning = false;
-                        return;
                     default:
                         Console.WriteLine("You think you're clever, huh? Press any key to try again.");
                         Console.ReadKey();
@@ -279,7 +267,7 @@ namespace GigGird_FinalProject
 
         public enum MainMenuEnum
         {
-            ViewMainMainMenu = 0,
+            ViewMainMenu = 0,
             ViewCurrentProjects = 1,
             ViewProjectMenu = 2,
             ViewPricingMenu = 3,
@@ -291,41 +279,41 @@ namespace GigGird_FinalProject
 
         public enum ProjectMenuEnum
         {
-            ViewProjectMenu = 0,
+            ViewMainMenu = 0,
             ViewCurrentProjects = 1,
             ViewAllProjects = 2,
             CreateNewProject = 3,
-            ViewMainMenu = 4,
+            ViewProjectMenu = 4,
         }
 
         public enum ClientMenuEnum
         {
-            ViewClientMenu = 0,
+            ViewMainMenu = 0,
             ViewCurrentClients = 1,
             ViewAllClients = 2,
             AddNewClient = 3,
-            ViewMainMenu = 4,
+            ViewClientMenu = 4,
         }
 
         public enum IncomeMenuEnum
         {
-            ViewIncomeMenu = 0,
+            ViewMainMenu = 0,
             ViewCurrentIncome = 1,
             ViewTotalIncome = 2,
             AddIncome = 3,
             ViewSavings = 4,
             ViewTithing = 5,
-            ViewMainMenu = 6,
+            ViewIncomeMenu = 6,
         }
 
         public enum PricingMenuEnum
         {
-            ViewPricingMenu = 0,
+            ViewMainMenu = 0,
             ViewProjectTypes = 1,
             CreateProjectType = 2,
             ViewAdditionalFeeCauses = 3,
             CreateAdditionalFeeCause = 4,
-            ViewMainMenu = 5,
+            ViewPricingMenu = 5,
         }
     }
 }

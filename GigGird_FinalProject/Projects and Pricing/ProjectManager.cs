@@ -89,7 +89,7 @@ namespace GigGird_FinalProject.Projects
         public Client GetClient()
         {
             string question = "Is this a re-occuring client? (y/n)";
-            string response = ""; 
+            string response = "";
             Client client = null;
             bool isValid = false;
 
@@ -100,17 +100,16 @@ namespace GigGird_FinalProject.Projects
                     Console.WriteLine("What's the name of the client? (Enter the exact name)");
                     response = Console.ReadLine();
 
-                    client = _gridManager.ClientManager.AllClients.FirstOrDefault(c => c.Name.Equals(response, StringComparison.OrdinalIgnoreCase));
-
-                    if (client != null)
+                    if (TryGetUser(response, out Client foundClient))
                     {
+                        client = _gridManager.ClientManager.AllClients.FirstOrDefault(c => c.Name.Equals(response, StringComparison.OrdinalIgnoreCase));
                         isValid = true;
                         return client;
                     }
                     else
                     {
                         Console.WriteLine($"Sorry, '{response} is not recognized. Please try again.");
-                        Console.WriteLine("Known Clients: " + string.Join(", ", _gridManager.ClientManager.AllClients.Select(c => c.Name)));
+                        Console.WriteLine($"\nKnown Clients: " + string.Join(", ", _gridManager.ClientManager.AllClients.Select(c => c.Name)));
                     }
                 }
             }
@@ -118,8 +117,14 @@ namespace GigGird_FinalProject.Projects
             {
                 _gridManager.ClientManager.AddNewClient();
             }
-            
+
             return client;
+        }
+
+        public bool TryGetUser(string name, out Client client)
+        {
+            client = _gridManager.ClientManager.AllClients.Find(c => c.Name.Equals(name));
+            return client != null;
         }
 
     }
