@@ -20,10 +20,49 @@ namespace GigGird_FinalProject.Clients
         public List<Client> PastClients;
         public List<Client> AllClients;
 
-        public void DisplayCurrentClients() {}
-        public void DisplayAllClients() {}
-        public void AddNewClient() {}
-        public void ArchiveClient() {}
-        public void UnArchiveClient() {}
+        public void DisplayCurrentClients()
+        {
+            foreach (var client in CurrentClients)
+            {
+                Console.WriteLine($"{client.Name}");
+                Console.WriteLine("  Ongoing Projects:");
+                foreach (var project in client.OngoingContracts)
+                {
+                    Console.WriteLine("   " + project.ProjectType.Name);
+                }
+                Console.WriteLine("  Completed Projects:");
+                foreach (var project in client.CompletedContracts)
+                {
+                    Console.WriteLine("   " + project.ProjectType.Name);
+                }
+            }
+        }
+        public void DisplayAllClients()
+        {
+            foreach (var client in AllClients)
+            {
+                Console.WriteLine($"{client.Name}");
+                Console.WriteLine("  Ongoing Projects:");
+                foreach (var project in client.OngoingContracts)
+                {
+                    Console.WriteLine("   " + project.ProjectType.Name);
+                }
+                Console.WriteLine("  Completed Projects:");
+                foreach (var project in client.CompletedContracts)
+                {
+                    Console.WriteLine("   " + project.ProjectType.Name);
+                }
+            }
+        }
+        public void AddNewClient()
+        {
+            Console.Write("Client's Name: ");
+            string name = Console.ReadLine();
+
+            Console.Write("\nClient's Contact: ");
+            string contact = Console.ReadLine();
+            Client client = new Client(name, contact);
+        }
+
     }
 }

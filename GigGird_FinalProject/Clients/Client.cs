@@ -10,7 +10,6 @@ namespace GigGird_FinalProject.Clients
         public string Location { get; set; }
 
         public string Contact;
-        public string CompletedProjects { get; set; }
         private bool CompletedPayment { get; set; }
 
         public List<ProjectContract> OngoingContracts { get; set; }
@@ -18,9 +17,10 @@ namespace GigGird_FinalProject.Clients
 
         public Client() { }
 
-        public Client(string name) 
+        public Client(string name, string contact) 
         {
             Name = name;
+            Contact = contact;
         }
     }
 }

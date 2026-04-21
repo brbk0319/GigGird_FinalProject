@@ -3,8 +3,8 @@ using GigGird_FinalProject;
 
 Console.WriteLine("Hello, World!");
 
-GigGridManager gridManager = new GigGridManager();
+GridRunner gridRunner = new GridRunner();
 
-gridManager.run();
+gridRunner.run();
 
 

@@ -40,7 +40,7 @@ namespace GigGird_FinalProject.Money
 
         public PricingManager() { }
 
-        public void PricingMenu()
+        public void DisplayAllPriceDescriptions()
         {
             foreach(var type in ProjectTypes)
             {
@@ -55,7 +55,7 @@ namespace GigGird_FinalProject.Money
         {
             PriceType priceType = ProjectTypes["Odd Job"];
 
-            PricingMenu();
+            DisplayAllPriceDescriptions();
 
             Console.WriteLine("Which type of project is this?");
             //TODO: parse project type, check if rate is good or needs changing, assign Pricetype
@@ -63,7 +63,25 @@ namespace GigGird_FinalProject.Money
             
         }
 
-        public void AddNewJob(string name, decimal rate, string description)
+        public void CreateNewProjectType()
+        {
+            //TODO: ask name, rate, and description
+
+            Console.WriteLine("What's the name of this project type?");
+            string name = Console.ReadLine();
+
+            Console.WriteLine("What's the going rate for this project type?");
+            decimal rate = decimal.Parse(Console.ReadLine());
+
+            Console.WriteLine("What's the description for this project type?");
+            string description = Console.ReadLine();
+
+
+            InitializeProjectType(name, rate, description);
+        }
+
+
+        public void InitializeProjectType(string name, decimal rate, string description)
         {
             ProjectTypes[name] = new PriceType(name, rate, description);
         }
