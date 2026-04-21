@@ -5,6 +5,6 @@ Console.WriteLine("Hello, World!");
 
 GridRunner gridRunner = new GridRunner();
 
-gridRunner.run();
-
+gridRunner.Run();
+//Debug not running project??? idk?????????
 

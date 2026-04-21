@@ -11,12 +11,17 @@ namespace GigGird_FinalProject
     {
 
         public readonly GigGridManager _gManager;
-        public GridRunner( GigGridManager gManager)
+        public GridRunner( )
         {
-            _gManager = gManager;
-            Menu gridMenu = new Menu(_gManager);
+            _gManager = new GigGridManager();
 
+        }
+
+        public void Run()
+        {
+            Menu gridMenu = new Menu(_gManager);
             gridMenu.DisplayMainMenu();
+            //Debug thing won't run????? idk.
         }
 
         /* TODO: 

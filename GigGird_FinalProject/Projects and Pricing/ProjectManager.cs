@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using GigGird_FinalProject.Clients;
 using GigGird_FinalProject.Money;
@@ -35,6 +36,8 @@ namespace GigGird_FinalProject.Projects
                     $"\n   Client: {proj.Client.Name}" +
                     $"\n   Rate: {proj.ProjectType.PriceRate}");
             }
+
+            Console.ReadKey();
         }
 
 
@@ -68,6 +71,8 @@ namespace GigGird_FinalProject.Projects
                     $"\n   Rate: {proj.ProjectType.PriceRate}" +
                     $"\n   Completed: {proj.Deadline}");
             }
+
+            Console.ReadKey();
         }
 
         public void CreateNewProject()
@@ -83,8 +88,38 @@ namespace GigGird_FinalProject.Projects
 
         public Client GetClient()
         {
-            //TODO: search for client name in ClientManager clients list
-            return Client client;
+            string question = "Is this a re-occuring client? (y/n)";
+            string response = ""; 
+            Client client = null;
+            bool isValid = false;
+
+            if (GigUtils.GetYesNo(question))
+            {
+                while (!isValid)
+                {
+                    Console.WriteLine("What's the name of the client? (Enter the exact name)");
+                    response = Console.ReadLine();
+
+                    client = _gridManager.ClientManager.AllClients.FirstOrDefault(c => c.Name.Equals(response, StringComparison.OrdinalIgnoreCase));
+
+                    if (client != null)
+                    {
+                        isValid = true;
+                        return client;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Sorry, '{response} is not recognized. Please try again.");
+                        Console.WriteLine("Known Clients: " + string.Join(", ", _gridManager.ClientManager.AllClients.Select(c => c.Name)));
+                    }
+                }
+            }
+            else
+            {
+                _gridManager.ClientManager.AddNewClient();
+            }
+            
+            return client;
         }
 
     }

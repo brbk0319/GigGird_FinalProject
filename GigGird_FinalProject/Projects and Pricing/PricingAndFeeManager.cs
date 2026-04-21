@@ -87,7 +87,7 @@ namespace GigGird_FinalProject.Money
                 if (ProjectTypes.ContainsKey(response))
                 {
                     isValid = true;
-                    priceType = ProjectTypes[response].Clone(); ;
+                    priceType = ProjectTypes[response].Clone();
                 }
                 else
                 {
