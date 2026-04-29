@@ -19,7 +19,16 @@ namespace GigGird_FinalProject
 
         public void Run()
         {
+
+
             Menus gridMenu = new Menus(_gManager);
+
+            Client bob = new Client("Bob", "4353140000");
+            Client noel = new Client("noel", "4353140000");
+
+             Project bobsProject = new Project(bob, _gManager.PricingManager.ProjectTypes["Odd Job"]);
+             Project NoelsProject = new Project(noel, _gManager.PricingManager.ProjectTypes["Babysitting"]);
+
             gridMenu.DisplayMainMenu();
             //Debug thing won't run????? idk.
         }
